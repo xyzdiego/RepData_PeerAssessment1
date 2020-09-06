@@ -60,6 +60,15 @@ median_steps <- median(total_steps$steps)
 
 The mean of the total number od steps taken per day is `r mean_steps` (the vertical line in the histogram) and the median is `r median_steps`
 
+The mean and median steps per day view in the next tables
+```{r meanmediandays, echo=TRUE}
+meanday <- tapply(total_steps$steps, total_steps$date, mean)
+medianday <- tapply(total_steps$steps, total_steps$date, median)
+all.equal(medianday, meanday)
+```
+
+And see the mean and median per day are the same.
+
 ## What is the average daily activity pattern?
 
 - Make a time series plot (i.e. type = “l”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
@@ -107,6 +116,15 @@ abline(v = total_mean, lwd = 2, lty = 2, col = "gray30")
 ```
 
 The mean of the total number od steps taken per day with imputed missing values is `r total_mean` (the vertical line in the histogram) and the median is `r total_median`
+
+The mean and median steps per day view in the next tables
+```{r, echo=TRUE}
+total_meanday <- tapply(total_imputed$daily_steps, total_imputed$date, mean)
+total_medianday <- tapply(total_imputed$daily_steps, total_imputed$date, median)
+total_meanday; total_medianday
+all.equal(total_meanday, total_medianday)
+```
+And see the mean and median per day are the same.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
